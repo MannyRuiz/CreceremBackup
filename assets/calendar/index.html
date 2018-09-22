@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <title>Document</title>
+    <link rel="stylesheet" href="calendario.manny.css">
+</head>
+<body>
+    <label>Número de semanas</label>
+    <select id="semanasMostrar" onSelect="cambiarSemanas()">
+        
+    </select>
+    <h1 id="titulo">A</h1>
+    
+    <div id="as">
+
+    </div>
+
+    <button onclick="renderPrevious()">Anterior Semana</button>
+    <button onclick="renderNext()">Siguiente Semana</button>
+    
+    <script src="./date-prototype-functions.js"></script>
+    <script src="./daleperro.js"></script>
+    <script type="text/javascript">
+        var options = "";
+        const selectDOM = document.getElementById("semanasMostrar");
+
+        for(let i = 2; i<=20; i += 2) {
+            options += `<option value="${i}">${i}</option>`;
+        }
+        selectDOM.innerHTML += options;
+
+
+        selectDOM.addEventListener('change', cambiarSemanas);
+
+        function cambiarSemanas() {
+            showWeeks = Number(selectDOM.value);
+            weekRender();
+        }
+
+    </script>
+</body>
+</html>
