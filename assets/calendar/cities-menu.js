@@ -13,12 +13,13 @@ function setCitiesOptionsTable() {
                         <td><span style="background-color:${ciudad.backgroundColor}; width:100%; padding:5px;"></span></td>
                         <td><a href="#" data-id="${ciudad.id}" class="modificarModal">Modificar</a></td>
                         <td><a href="#" data-id="${ciudad.id}" onclick="event.preventDefault(); desactivarVisualizacionCiudad(${ciudad.id}, ${ciudad.visualizar});">${visualizacion}</a></td>
+                        <td><a href="#" data-id="${ciudad.id}" onclick="event.preventDefault(); desactivarSede(${ciudad.id}, ${ciudad.desactivar});">${desactivacion}</a></td>
                     </tr>`;
     });
     citiesTable.innerHTML = htmlNode;
 }
 
-//Eliminar ciudad
+//Desactivar la visualización de una sede
 function desactivarVisualizacionCiudad(id, vis) {
   var idarray = {id:id, num:vis};
   var request = $.ajax({
@@ -40,3 +41,26 @@ function desactivarVisualizacionCiudad(id, vis) {
   });
 }
   
+//Desactivar una sede (hacerla no disponible para ningún trámite)
+function desactivarSede(id, des) {
+  var idarray = {id:id, des:des};
+  console.log(des)
+  var request = $.ajax({
+    url: "/crecerem/index.php/api/desactivarciudad",
+    data: idarray,
+    type: "POST",
+    contentType: "application/json; charset=utf-8",
+    dataType: "text"
+  });
+
+  request.done(function(msg) {
+    console.log(msg)
+    if(msg == "Sede desactivada") {
+      renderearCalendarioInicial();
+    }
+  });
+
+  request.fail(function(jqXHR, textStatus) {
+    console.log(textStatus );
+  });
+}

@@ -2,66 +2,31 @@
 class Model_Calendar extends CI_Model {
 
 
+
+    
     public function eventos()
     {
-        $this->db->select("*, eventos.backgroundColor as bc");
         $this->db->from('eventos');
-        $this->db->join('tipo_cursos', 'tipo_cursos.id = eventos.curso');
-        $this->db->join('sucursales', 'sucursales.id = eventos.id_sede');
-        $this->db->join('users', 'eventos.coachId = users.id');
         $this->db->order_by("lugar", "desc");
         $query = $this->db->get();
         $query = $query->result_array();
-        $asd = $query;
-
+        $array = null;
         $colorTexto = "white";
-        
         foreach($query as $clave => $valor) {
+            if($query[$clave]['color'] == "white") {
+                $colorTexto = "black";
+            }
             $array[$clave] = array(
                 "id" => $query[$clave]["id"],
-                "curso" => $query[$clave]["titulo"],
+                "title" => $query[$clave]["lugar"] . " - " . $query[$clave]["nombre_evento"],
                 "start" => $query[$clave]["fecha_inicio"],
                 "end" => $query[$clave]["fecha_termino"],
-                "backgroundColor" => $query[$clave]["bc"],
-                "textColor" => $query[$clave]["textColor"],
-                "id_sede" => $query[$clave]["id_sede"],
-                "abbr" => $query[$clave]["abbr"]
+                "backgroundColor" => $query[$clave]["color"],
+                "textColor" => $colorTexto,
+                "lugar" => $query[$clave]["lugar"]
             );
         }
         return $array;
-    }
-
-    public function hextorgba($color) {
-        $default = $color;
-        $opacity = true;
-
-        //Sanitize $color if "#" is provided 
-        if ($color[0] == '#' ) {
-        	$color = substr( $color, 1 );
-        }
-        //Check if color has 6 or 3 characters and get values
-        if (strlen($color) == 6) {
-            $hex = array( $color[0] . $color[1], $color[2] . $color[3], $color[4] . $color[5] );
-        } elseif ( strlen( $color ) == 3 ) {
-                $hex = array( $color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2] );
-        } else {
-                return $default;
-        }
-
-        //Convert hexadec to rgb
-        $rgb =  array_map('hexdec', $hex);
-
-        //Check if opacity is set(rgba or rgb)
-        if($opacity){
-            if(abs($opacity) > 1)
-                $opacity = 1.0;
-            $output = 'rgba('.implode(",",$rgb).',0.25)';
-        } else {
-            $output = 'rgb('.implode(",",$rgb).')';
-        }
-
-        //Return rgb(a) color string
-        return $output;
     }
 
     public function sucursales()
@@ -70,19 +35,7 @@ class Model_Calendar extends CI_Model {
         $this->db->order_by("id", "asc");
         $query = $this->db->get();
         $query = $query->result_array();
-        $array = null;
-        foreach($query as $clave => $valor) {
-            $array[$clave] = array(
-                "id" => $query[$clave]["id"],
-                "nombre" => $query[$clave]["nombre"],
-                "abbr" => $query[$clave]["abbr"],
-                "backgroundColor" => $this->hextorgba($query[$clave]["backgroundColor"]),
-                "visualizar" => $query[$clave]["visualizar"],
-                "desactivar" => $query[$clave]["desactivar"]
-            );
-        }
-
-        return $array;
+        return $query;
     }
 
     public function crearNuevaCiudad()

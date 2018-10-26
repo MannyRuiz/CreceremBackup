@@ -79,11 +79,6 @@ function calendarRowHeightClass(num_Ciudades) {
 
 function weekRender() {    
     sortEvents();
-    /*var divmamalon = `<div class="cr7">
-                        <div class="CU"></div>
-                        <div class="DF"></div>
-                        <div class="TX"></div>
-                      </div>`*/
     var alturaCiudad = calendarRowHeightClass(numCiudades);
     var divmamalon = createDivisionContainers();
     var tbody = document.getElementById("as");
@@ -111,7 +106,7 @@ function weekRender() {
         var day_date = new Date(sdia);
         var weekDay = day_date.getDay();
         var year = day_date.getFullYear();
-        var month = (String(day_date.getMonth()).length < 2) ? `0${day_date.getMonth()+1}` : `${day_date.getMonth()+1}`;
+        var month = (String(day_date.getMonth()+1).length < 2) ? `0${day_date.getMonth()+1}` : `${day_date.getMonth()+1}`;//bug arreglado, al parecer :D
         var day = (String(day_date.getDate()).length < 2) ? `0${day_date.getDate()}` : `${day_date.getDate()}`;
         var weekdays = ""
 
@@ -146,6 +141,7 @@ function weekRender() {
 
     //eventValidation(listaEventos[0]);//tranqui checa si jala o no
     listaEventos.forEach((evento) => {
+        console.log(evento)
         eventValidation(evento);
     })
 }
@@ -155,6 +151,7 @@ function weekRender() {
 /* AQUÍ SE PONE LA DURACIÓN DE LOS EVENTOS */
 function eventValidation(events) {
     var eventData = {
+        id: events.id,
         start: {
             day: events.start.substring(8,10),
             month: events.start.substring(5,7),
@@ -166,8 +163,10 @@ function eventValidation(events) {
             year: events.end.substring(0,4)
         },
         backgroundColor: events.backgroundColor,
-        lugar: events.lugar,
-        titulo: events.title
+        textColor: events.textColor,
+        sede_id: events.id_sede,
+        tipo_curso: events.curso,
+        abbr: events.abbr
     };
     var weekrows = document.querySelectorAll("#as .calendar-row");
     
@@ -215,14 +214,16 @@ function eventValidation(events) {
                 events.backing = false;
             }
         } else if(events.backing) {
-            //viene de atrás pero atravesará todo jajaa xd
-            duration = daysShown;
-            eventSetting(duration, eventData, daysOnRow);
-            events.backing = false;
+            if(eventStartDate.isAfter(startDate)) {
+
+            }
+            else {
+                //viene de atrás pero atravesará todo jajaa xd
+                duration = daysShown;
+                eventSetting(duration, eventData, daysOnRow);
+                events.backing = false;
+            }
         }
-        
-
-
     });
     
 }
@@ -231,22 +232,29 @@ function eventValidation(events) {
 function eventSetting(time, event, daysOnRow) {
     let eventNode = "";
     let backgroundColor = event.backgroundColor;
-    let lugar = event.lugar;
+    let textColor = event.textColor;
+    let lugar = event.sede_id;
     let margin = "";
     let duration = time*100/daysShown;
     let eventDate = `${event.start.year}-${event.start.month}-${event.start.day}`;
+
+    
     for(let i = 0; i<daysOnRow.length; i++) {
         let day = daysOnRow[i];
+        //console.log(day.dataset.date)//este es el bug perrrrrro
         if(day.dataset.date == eventDate) {
+            //console.log(eventDate)
+            //console.log(day.dataset.date)
             margin = day.dataset.margin;
             break;
         }
     }
     margin = margin/daysShown*100;
-    console.log(event.start)
-    eventNode = `<div data-toggle="tooltip" data-html="true" data-placement="top" rel="tooltip" title="<b>${event.titulo}</b><br>${event.start.day}/${event.start.month}/${event.start.year} - ${event.end.day}/${event.end.month}/${event.end.year}" data-lugar="${lugar}" class="event-container" style="margin-left:${margin}%;background-color:${backgroundColor};opacity:1;width:${duration}%;height:4vh;"><span>${event.titulo}</span></div>`
-    eventRender(eventNode, daysOnRow, lugar);
     //console.log(event)
+    eventNode = `<div data-toggle="tooltip" data-html="true" data-placement="top" rel="tooltip" title="<b>${event.titulo}</b><br>${event.start.day}/${event.start.month}/${event.start.year} - ${event.end.day}/${event.end.month}/${event.end.year} <br> <b>Coach Carlos Vela</b> <img style='width:50px; height:50px;' src='https://laverdadnoticias.com/__export/1540233534279/sites/laverdad/img/2018/10/22/descarga_1.jpg_793492074.jpg'>" data-lugar="${lugar}" class="event-container" style="margin-left:${margin}%;background-color:${backgroundColor};color:${textColor};opacity:1;width:${duration}%;height:4vh;">
+                    <span style="text-transform:uppercase;">${event.tipo_curso.substr(0,2)}${event.id} ${event.abbr}</span>
+                </div>`
+    eventRender(eventNode, daysOnRow, lugar);
 }
 /*PREPARA EL EVENTO NODE */
 
@@ -254,9 +262,11 @@ function eventSetting(time, event, daysOnRow) {
 /* EVENT RENDERING */
 function eventRender(node, dom, lugar) {
     dom = dom[dom.length-1].childNodes;
-    //console.log(dom)
+    console.log(dom)
+    console.log(lugar)
     for(let i = 1; i<dom.length; i+=2) {
-        if(dom[i].classList.contains(lugar)) {
+        //if(dom[i].classList.contains(lugar)) {
+        if(dom[i].dataset.sedeid == lugar) {
             dom = dom[i];
             break;
         }
@@ -270,15 +280,16 @@ function eventRender(node, dom, lugar) {
 function createDivisionContainers() {
     var ciudades = listaCiudades;
     let divmamalon = `<div class='cr7'>`;
+    
 
     ciudades.forEach((ciudad, i) => {
         if(ciudad.visualizar == 1 && ciudad.desactivar == 0) {
             if(i == 0) {
                 divmamalon += `
-            <div class="${ciudad.abbr} ciudad-container" style="padding-bottom:2px; margin-top:2.8%;background-color:${ciudad.backgroundColor};"></div>`
+            <div class="${ciudad.abbr} ciudad-container" data-sedeid="${ciudad.id}" style="padding-bottom:2px; margin-top:2.8%;background-color:${ciudad.backgroundColor};"></div>`
             } else {
                 divmamalon += `
-            <div class="${ciudad.abbr} ciudad-container" style="background-color:${ciudad.backgroundColor};"></div>`
+            <div class="${ciudad.abbr} ciudad-container" data-sedeid="${ciudad.id}" style="background-color:${ciudad.backgroundColor};"></div>`
             }
         }
     });

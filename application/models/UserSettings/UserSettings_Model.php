@@ -1,5 +1,5 @@
 <?php  
- class Main_model extends CI_Model  
+ class UserSettings_Model extends CI_Model  
  {  
       function can_login($username, $password)  
       {  

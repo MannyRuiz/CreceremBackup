@@ -1,0 +1,373 @@
+.newEvents-container {
+    width:100%;
+    height:80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items:flex-start;
+    padding-bottom:2.5%;
+    margin-bottom:5%;
+}
+/*SMALL SHET*/
+.eventType-small {
+    position:absolute;
+    right:2%;
+    top:0;
+    width:40px;
+    height:40px;
+    background-color: #4DB6AC;
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+    border-radius:50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.2s ease-in-out all;
+}
+.eventType-small:active {
+    background-color: #009688;
+    transform:scale(0.97);
+}
+.eventType-container {
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.eventType-wrapper {
+    width:70%;
+    height:100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.eventType-wrapper .event {
+    width:50%;
+    height:50%;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    overflow: hidden;
+    transition:0.6s ease all;
+    position: relative;
+}
+.event-selector-background {
+    width:100%;
+    height:100%;
+    background-image: url('http://www.trabajo.com.mx/gif/lider2.jpg');
+    background-size: cover;
+    background-position: center;
+    transition:0.6s ease all;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.event-selector-title {
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.6);
+    color:black;
+    font-weight: bold;
+    transition:0.6s ease-in-out all;
+    position: absolute;
+    top:0;
+    left:0;
+    text-transform: uppercase;
+}
+.ev1 {
+    border-top-left-radius: 4px;
+}
+.ev2 {
+    border-top-right-radius: 4px;
+}
+.ev3 {
+    border-bottom-left-radius: 4px;
+}
+.ev4 {
+    border-bottom-right-radius: 4px;
+}
+.ev1 .event-selector-title:hover + .event-selector-background, .ev3 .event-selector-title:hover + .event-selector-background {
+    background-position: left;
+}
+.ev2 .event-selector-title:hover + .event-selector-background, .ev4 .event-selector-title:hover + .event-selector-background {
+    background-position: right;
+}
+.back-pack {
+    background-image: url('https://www.crecerem.com/pub/uploads/thumbs/slide1org_727f9272c0e6e7a294664adfb7e2b40d.jpg');
+}
+.back-base {
+    background-image: url('https://www.crecerem.com/pub/uploads/thumbs/basepablo_4dde9a46ee9d66b57d1482d67ad874a1.jpg');
+}
+.back-inter {
+    background-image: url('https://www.crecerem.com/pub/uploads/cursos/lideres.jpg');
+}
+.back-lead {
+    background-image: url('https://www.crecerem.com/pub/uploads/thumbs/slide3_4dde9a46ee9d66b57d1482d67ad874a1.jpg');
+}
+.event-selector-title:hover {
+    letter-spacing: 4pt;
+    background-color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    color:black;
+    font-weight: bolder;
+}
+/*SMALL SHET*/
+.event-creation-progress {
+    width:100%;
+    height:15%;
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    transition:1s ease all;
+    opacity: 1;
+}
+/*  STEPS  */
+.step-circle {
+    width:60px;
+    height:60px;
+    color:#BDBDBD;
+    background-color:#ECEFF1;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 4%;
+}
+.step-name {
+    color:#BDBDBD;
+}
+/* -- STEPS -- */
+.event-creation-progress .step {
+    box-sizing: border-box;
+    width:20%;
+    height:100%;
+    border-width: 16px 0 16px 16px;
+    border-color: transparent transparent transparent #85b375;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+}
+.event-creation-progress .done {
+    background-color: #26A69A;
+    color:white;
+    border-left:2pt solid transparent;
+    border-right:2pt solid transparent;
+}
+.event-creation-progress .current {
+    background-color: #e57373;
+    color:#ffebee;
+    border-left:2pt solid transparent;
+    border-right:2pt solid transparent;
+}
+.event-creation-progress .current-text {
+    color:#f39ba3;
+}
+.step-color {
+    color:#26A69A;
+}
+.info-background-container {
+    width:100%;
+    height:75%;
+    background-size: cover;
+    background-position: center;
+    transition:1s ease all;
+    opacity: 1;
+    margin-top:2%;
+}
+
+/*SELECCIONAR SEDE Y EL QUE DARÁ EL CURSO*/
+.place-selection {
+    position:relative;
+    width:100%;
+    height:20%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    transition:1s ease all;
+}
+option:hover {
+    display:cursor;
+}
+/*------ SELECCIONAR SEDE Y EL QUE DARÁ EL CURSO ----------*/
+
+/* SELECCIONAR FECHA */
+.date-selection-container {
+    width:100%;
+    height:20%;
+    position:relative;
+    display: flex;
+    justify-content: space-around;
+    align-items:center;
+}
+.date-selection-container .date-info {
+    width:25%;
+    height:85%;
+    background-color: lightpink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor:pointer;
+}
+.date-selection-container .date-info:hover {
+    background-color: green !important;
+}
+/* ----- SELECCIONAR FECHA ------- */
+
+/* DATOS DEL EVENTO */
+.event-data {
+    width:100%;
+    height:20%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position:relative;
+}
+.event-data input {
+    width:25%;
+    height:20%;
+}
+.event-data select, .place-selection select {
+    width:25%;
+    height:20%;
+}
+/* ---- DATOS DEL EVENTO -------*/
+.course-manager-selection {
+    width:100%;
+    height:40%;
+    background-color:lightblue;
+}
+.event-creation-finalized {
+    width:100%;
+    height:10%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.event-creation-finalized .message {
+    width:50%;
+    height:100%;
+    background-color: #e57373;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    cursor: pointer;
+    transition: 0.7s ease all;
+    color:white;
+}
+.event-creation-finalized .message:hover {
+    background-color: #f44336;
+    color:white;
+    letter-spacing: 6px;
+}
+.event-creation-finalized .create-new-event {
+    width:50%;
+    height:100%;
+    background-color:#4DB6AC;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    cursor: pointer;
+    color:white;
+    transition: 0.8s;
+}
+.event-creation-finalized .create-new-event:hover {
+    background-color: #26A69A;
+    letter-spacing: 10px;
+}
+.hide-step {
+    display: none !important;
+    transition:1s ease all;
+    opacity: 0 !important;
+}
+.selected {
+    background-color:lightgreen !important;
+}
+.dont-show-button {
+    display: none !important;
+}
+
+.section-active {
+    animation-name: active;
+    animation-duration: 1.8s; 
+    animation-timing-function: ease-in; 
+    animation-delay: 0s;
+}
+.section-acstive {
+    animation-name: active;
+    animation-duration: 0.8s; 
+    animation-timing-function: ease-in; 
+    animation-delay: 1s;
+}
+
+
+/*ANIMACIONES*/
+@keyframes active {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  /* NÚMERO DE PASO */
+.step-number-proccess {
+    position:absolute;
+    top:0;
+    left:0;
+    width:30px;
+    height:30px;
+    border:2pt solid white;
+    background-color:#ef5350;
+    border-radius:50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:white;
+}
+/* --- NÚMERO DE PASO --- */
+
+/*CAMBIAR FOTO*/
+.new-image-container {
+    position:relative;
+    width:100%;
+    height:100%;
+}
+.new-image-hover {
+    position:absolute;
+    width:100%;
+    height:100%;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    text-decoration: none;
+    color:white;
+}
+.new-image-message {
+    width:100%;
+    height:40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:rgba(0, 0, 0, 0.35);
+    transition:0.35s ease-in-out all;
+}
+.new-image-hover:hover .new-image-message {
+    height:100%;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+/**

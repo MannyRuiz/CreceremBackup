@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Calendario extends CI_Controller {
+class Eventos extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -10,11 +10,10 @@ class Calendario extends CI_Controller {
         }
     }
 
-    public function index() {
+    public function generador() {
         $this->load->view("header");
-        $this->load->view("calendar");
+        $this->load->view("generador_eventos/index");
         $this->load->view("footer");
-        //$this->load->view("calendario");
     }
 
     public function eventos() {

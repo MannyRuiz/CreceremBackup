@@ -19,21 +19,32 @@
                 $username = $this->input->post('username');  
                 $password = $this->input->post('password'); 
                 $password = md5($password); 
-                //model function  
+                //model function 
+
+            /* ******FALTA PONER LOS DATOS DEL USUARIO MANDARLOS A LA SESIÓN PARA MOSTRARLOS******** */
+
                 $this->load->model('main_model');  
                 if($this->main_model->can_login($username, $password))  
                 {  
-                     $session_data = array(  
-                          'username'     =>     $username  
-                     );  
-                     $this->session->set_userdata($session_data);  
-                     header("Location: http://localhost/original/index.php/calendario");
-                     die();
+                    $datos_usuario = $this->main_model->user_data($username);
+                    $session_data = array(  
+                        'username' => $username,
+                        'logged_in' => true,
+                        'user_id' => $datos_usuario[0]['id'],
+                        'email' => $datos_usuario[0]['correo'],
+                        'name' => $datos_usuario[0]['nombre'],
+                        'url' => $datos_usuario[0]['url_foto'],
+                        'rol' => $datos_usuario[0]['rol'],
+                        'sede' => $datos_usuario[0]['sede']
+                    );  
+                    $this->session->set_userdata($session_data);  
+                    header("Location: http://localhost/crecerem/index.php/calendario");
+                    die();
                 }  
                 else  
                 {  
                      $this->session->set_flashdata('error', 'Invalid Username and Password');  
-                     header("Location: http://localhost/original/index.php/main/login");
+                     header("Location: http://localhost/crecerem/index.php/main/login");
                      die();
                 }  
            }  
@@ -51,12 +62,20 @@
            }  
            else  
            {  
-            header("Location: http://localhost/original/index.php/main/login");
+            header("Location: http://localhost/crecerem/index.php/main/login");
            }  
       }  
       function logout()  
       {  
            $this->session->unset_userdata('username');  
-           header("Location: http://localhost/original/index.php/main/login");
+           header("Location: http://localhost/crecerem/index.php/main/login");
       }  
+
+
+      function prueba() {
+        $this->load->database();
+        $this->load->model("main_model", 'modelo');
+        $data['resultado'] = $this->modelo->user_data("admin");
+        
+      }
  }   

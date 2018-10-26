@@ -11,8 +11,11 @@ include_once("header.php")
             <div class="calendar-header">
               <h1 id="titulo"></h1>
               <div>
-                <button id="openModal" class="btn btn-primary">Opciones de calendario</button>
-                <button id="" class="btn btn-primary">Opciones de visualización</button>
+                <!--<button id="openModal" class="btn btn-primary"><i class="zmdi zmdi-settings"></i></button>-->
+                <button id="openModal" class="btn-calendar btn btn-primary"><i class="zmdi zmdi-settings"></i></button>
+                <button onclick="renderPrevious()" class="btn-calendar btn btn-primary"><i class="zmdi zmdi-skip-previous"></i></button>
+                <button onclick="renderNext()" class="btn-calendar btn btn-primary"><i class="zmdi zmdi-skip-next"></i></button>
+                <!--<button id="" class="btn btn-primary">Opciones de visualización</button>-->
               </div>
             </div>
             <div id="as">
@@ -27,7 +30,7 @@ include_once("header.php")
 
   <!--MODAL-->
   <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="modalTittie"></h5>
@@ -36,7 +39,66 @@ include_once("header.php")
           </button>
         </div>
         <div class="modal-body">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam quia, in fugiat, eum nam autem enim sequi dolore quasi maiores, cumque quod atque voluptatum veniam error vero? Distinctio, quasi consequatur!
+          <div class="row">
+            <div class="col d-flex justify-content-start align-items-center">
+              <h3 style="margin-right:1%;">
+                <img title="Manuel Ruiz" alt="Manuel Ruiz" class="img-responsive" style="width:60px; height:60px; border-radius:1000px;" src="https://i.cbc.ca/1.4857098.1539187290!/fileImage/httpImage/image.jpg_gen/derivatives/16x9_780/federer-roger-181010-1180.jpg" alt="Imagen de avatar">
+                Coach
+                <span class="font-weight-normal">Manuel Ruiz Cedillo</span>
+              </h3>
+              <a href="#" class="btn btn-sm btn-primary" title="Cambiar coach"><i class="zmdi zmdi-accounts-alt"></i></a>
+            </div>
+          </div>
+          <div class="row" style="margin-top:3%;">
+            <div class="col">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Inicio y Final</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Curso*</td>
+                    <td>xyz</td>
+                  </tr>
+                  <tr>
+                    <td>Reto</td>
+                    <td>xyz</td>
+                  </tr>
+                  <tr>
+                    <td>Primer fin</td>
+                    <td>xyz</td>
+                  </tr>
+                  <tr>
+                    <td>Segundo fin</td>
+                    <td>xyz</td>
+                  </tr>
+                  <tr>
+                    <td>Tercer fin</td>
+                    <td>xyz</td>
+                  </tr>
+                  <tr>
+                    <td>Zona amarilla</td>
+                    <td>xyz</td>
+                  </tr>
+                  <tr>
+                    <td>Zona verde</td>
+                    <td>xyz</td>
+                  </tr>
+                  <tr>
+                    <td>Ckp del 100%</td>
+                    <td>xyz</td>
+                  </tr>
+                  <tr>
+                    <td>Entrega de meta comunitaria</td>
+                    <td>xyz</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -58,14 +120,25 @@ include_once("header.php")
           </button>
         </div>
         <div class="modal-body">
-          <form role="form" id="my-form">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Nombre" name="nombre" />
-              <input type="text" class="form-control" placeholder="Abreviatura" name="abbr" />
-              <input type="color" class="colorpicker" class="form-control" placeholder="Color" name="backgroundColor" />
-              <button class="btn btn-primary btn-block" id="nuevaCiudad">Crear nueva sede</button>
+          <div class="row">
+            <div class="col d-flex">
+              <form role="form" id="my-form" class="form-inline">
+                <div class="form-group mb-2 mr-sm-3">
+                  <label for="ciudadSede" class="sr-only">Ciudad de la sede</label>
+                  <input type="text" class="form-control" placeholder="Nombre" name="nombre" id="ciudadSede" />
+                </div>
+                <div class="form-group mb-2 mr-sm-3">
+                  <input type="text" class="form-control" placeholder="Abreviatura" name="abbr" />
+                </div>
+                <div class="form-group mb-2 mr-sm-3">
+                  <input type="color" class="colorpicker" class="form-control" placeholder="Color" name="backgroundColor" />
+                </div>
+                <div class="form-group mb-2">
+                  <button class="btn btn-primary" id="nuevaCiudad">Crear nueva sede</button>
+                </div>
+              </form>
             </div>
-          </form>
+          </div>
           <h3>Sedes</h3>
           <table class="table">
             <thead class="thead-inverse">
